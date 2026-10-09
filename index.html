@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhD Opportunity Index</title>
+  <meta name="description" content="近期海外博士申请岗位索引，覆盖城市规划、景观、GeoAI/LLM、HCI、遗产和城市健康方向。">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23ffde7a'/%3E%3Cpath d='M14 42V18h16c8 0 13 4 13 11s-5 11-13 11h-8v2H14zm8-10h7c4 0 6-1 6-4s-2-4-6-4h-7v8z' fill='%23dc002d'/%3E%3Cpath d='M44 18h6v24h-6z' fill='%231f1f1f'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --paper: #fffaf0;
+      --ink: #202020;
+      --muted: #6a6256;
+      --line: #e4d8bd;
+      --accent: #dc002d;
+      --accent-ink: #86001b;
+      --gold: #ffde7a;
+      --panel: #ffffff;
+      --soft: #f7f2e6;
+      --black: #1f1f1f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Arial", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fff3c4 0, var(--paper) 330px);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: end;
+      border-bottom: 2px solid var(--black);
+      padding-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700;
+    }
+
+    .scope {
+      margin: 10px 0 0;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .updated {
+      min-width: 220px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 18px;
+      box-shadow: 8px 8px 0 #f1d264;
+    }
+
+    .updated strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .updated span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0 14px;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid var(--black);
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-weight: 700;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    button[aria-pressed="true"] {
+      background: var(--black);
+      color: #fff;
+    }
+
+    .notice {
+      margin: 12px 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 66px minmax(0, 1fr);
+      min-height: 360px;
+    }
+
+    .rank {
+      background: var(--gold);
+      font-size: 28px;
+      font-weight: 800;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 24px;
+      border-right: 1px solid var(--line);
+    }
+
+    .content {
+      padding: 22px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .org {
+      margin: 0;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(22px, 2.5vw, 32px);
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+
+    .en {
+      margin: -6px 0 0;
+      color: var(--black);
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .meta span {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      padding: 5px 8px;
+      font-size: 13px;
+      color: #433b31;
+    }
+
+    .summary {
+      margin: 0;
+      color: #352f28;
+    }
+
+    .keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .keywords span {
+      border: 1px solid #f0b8c4;
+      color: var(--accent-ink);
+      padding: 5px 7px;
+      font-size: 13px;
+      background: #fff8fa;
+    }
+
+    .link {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      padding: 9px 12px;
+    }
+
+    .link:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #111;
+      outline-offset: 3px;
+    }
+
+    footer {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 860px) {
+      header,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .updated {
+        min-width: 0;
+        box-shadow: 6px 6px 0 #f1d264;
+      }
+
+      .card {
+        grid-template-columns: 52px minmax(0, 1fr);
+      }
+
+      .rank {
+        font-size: 22px;
+      }
+
+      .content {
+        padding: 18px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <h1>近期海外博士申请信息一览</h1>
+        <p class="subtitle">PhD Opportunity Index</p>
+        <p class="scope">城市规划 / 景观 / GeoAI-LLM / HCI / 数字遗产 / 城市健康</p>
+      </div>
+      <div class="updated" aria-label="更新时间">
+        <strong>2026.10.09</strong>
+        <span>申请截止覆盖 2026.10.09 至 2026.12.15，以官网为准</span>
+      </div>
+    </header>
+
+    <nav class="toolbar" aria-label="方向筛选">
+      <button type="button" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" data-filter="urban">城市 / 规划</button>
+      <button type="button" data-filter="landscape">景观</button>
+      <button type="button" data-filter="geoai">GeoAI / LLM</button>
+      <button type="button" data-filter="hci">HCI / AI</button>
+      <button type="button" data-filter="heritage">遗产</button>
+    </nav>
+
+    <p class="notice">页面收录仍值得查看的近期博士岗位或博士项目。个别机会属于项目制招生或套磁型机会，卡片中已单独标明。</p>
+
+    <section class="grid" id="cards" aria-live="polite"></section>
+
+    <footer>
+      信息用于快速筛选申请线索。申请前请以每个项目官网的资格要求、截止日期、导师匹配和资助说明为准。
+    </footer>
+  </main>
+
+  <script>
+    const opportunities = [
+      {
+        title: "城市形态与健康步行",
+        en: "Urban Morphology and Walking",
+        org: "Chalmers University of Technology",
+        deadline: "2026.10.09",
+        type: "博士雇佣",
+        place: "瑞典哥德堡",
+        category: ["urban"],
+        summary: "研究城市形态如何影响步行活动和环境暴露，结合行人行为数据、GIS、Space Syntax、热环境、空气污染、噪声和城市自然，形成可用于规划干预优先级判断的证据。",
+        keywords: ["Urban Morphology", "GIS", "Space Syntax", "Urban Health"],
+        url: "https://academicpositions.com/se/ad/chalmers-university-of-technology/2026/doctoral-student-in-urban-morphology-and-walking-for-healthy-urban-planning-and-design/252446"
+      },
+      {
+        title: "AI用户界面与人机交互",
+        en: "Human-Computer Interaction and Design of AI User Interfaces",
+        org: "Stockholm University",
+        deadline: "2026.10.15",
+        type: "PhD student",
+        place: "瑞典斯德哥尔摩",
+        category: ["hci"],
+        summary: "面向AI系统的交互界面设计，关注用户理解、控制、透明性和协作体验。适合将HCI、AI agent、原型设计和用户研究结合的申请人。",
+        keywords: ["HCI", "AI Interfaces", "Prototyping", "User Studies"],
+        url: "https://academicpositions.com/ad/stockholm-university-dsv/2026/phd-student-in-computer-and-systems-sciences-with-focus-on-human-computer-interaction-and-design-of-ai-user-interfaces/252855"
+      },
+      {
+        title: "低带宽数字健康与XAI",
+        en: "Digital Health Lab and mHealth",
+        org: "KU Leuven",
+        deadline: "2026.10.30",
+        type: "PhD trajectory",
+        place: "比利时 / 巴勒斯坦",
+        category: ["hci"],
+        summary: "建设数字健康Living Lab，开发低带宽移动健康工具和可解释临床决策支持系统。研究强调HCI、AI/XAI、离线优先系统、可用性、信任和公平性评估。",
+        keywords: ["HCI", "Explainable AI", "Digital Health", "Equity Evaluation"],
+        url: "https://academicpositions.com/ch/ad/ku-leuven/2026/dialink-palestine-rd-of-a-digital-health-lab-and-low-bandwidth-mhealth-tools/253682"
+      },
+      {
+        title: "历史城市的定量研究",
+        en: "Quantitative Past Urban Studies",
+        org: "Max Planck Institute of Geoanthropology",
+        deadline: "2026.10.31",
+        type: "PhD Researcher",
+        place: "德国耶拿",
+        category: ["heritage", "urban"],
+        summary: "围绕历史城市与考古城市化展开定量研究，连接遗产、考古、城市史、空间数据和复杂系统分析。适合从遗产研究转向计算城市史的人。",
+        keywords: ["Past Urbanism", "Archaeology", "Spatial Data", "Urban History"],
+        url: "https://www.mpg.de/26919453/phd-researcher-quantitative-past-urban-studies"
+      },
+      {
+        title: "城市健康与蓝色城市",
+        en: "Blue Cities and Urban Health",
+        org: "University of Bonn",
+        deadline: "2026.11.02",
+        type: "10个博士岗位",
+        place: "德国波恩",
+        category: ["urban", "landscape"],
+        summary: "博士群组聚焦城市健康，尤其是蓝色空间、水系统、健康公平、城市治理和Global South案例。适合城市规划、地理、环境、公共健康交叉背景。",
+        keywords: ["Urban Health", "Blue Spaces", "Water Governance", "Climate Adaptation"],
+        url: "https://www.uni-bonn.de/en/university/working-at-the-university/job-opportunities/vacancies-1/10-doctoral-research-positions-all-genders-in-the-interdisciplinary-field-of-urban-health"
+      },
+      {
+        title: "景观治理与雨洪管理",
+        en: "Landscape Governance",
+        org: "Swedish University of Agricultural Sciences",
+        deadline: "2026.11.16",
+        type: "博士雇佣",
+        place: "瑞典Alnarp",
+        category: ["landscape", "urban"],
+        summary: "研究城市排水基础设施的运维治理，包括蓝绿基础设施、组织协同、决策流、部门角色和长期维护策略，目标是减少污染负荷并支持可持续城市水管理。",
+        keywords: ["Landscape Governance", "Blue-Green Infrastructure", "Stormwater", "Policy Analysis"],
+        url: "https://www.slu.se/en/about-slu/work-at-slu/jobs-and-vacancies/doktorand-i-landskapets-governance-och-forvaltning"
+      },
+      {
+        title: "GeoAI与LLM多智能体",
+        en: "GeoAI and Spatial Data Science",
+        org: "University of Iowa",
+        deadline: "2026.12.01",
+        type: "2个全奖博士",
+        place: "美国Iowa City",
+        category: ["geoai"],
+        summary: "招收两个全奖博士，方向包括可信GeoAI、空间显式建模、可解释性、不确定性量化，以及LLM驱动的多智能体GeoAI模型发现与推理。",
+        keywords: ["GeoAI", "LLM Agents", "Spatial Data Science", "Uncertainty"],
+        url: "https://peng-luo.com/opportunities.html"
+      },
+      {
+        title: "空间显式AI与地理基础模型",
+        en: "Geospatial Artificial Intelligence",
+        org: "University of Texas at Austin",
+        deadline: "2026.12.15左右",
+        type: "博士招生 / 套磁型机会",
+        place: "美国Austin",
+        category: ["geoai"],
+        summary: "研究GeoAI、空间显式机器学习、深度学习、知识图谱和空间数据挖掘。方向与地理基础模型、多模态地理智能、空间表征学习高度相关。",
+        keywords: ["GeoAI", "Spatial ML", "Knowledge Graphs", "Foundation Models"],
+        url: "https://gengchenmai.github.io/html/recruit.html"
+      },
+      {
+        title: "欧洲文化遗产联合博士",
+        en: "Cultural Heritage Doctoral Programme",
+        org: "Una Europa",
+        deadline: "2026.11.27",
+        type: "博士项目申请",
+        place: "欧洲高校联盟",
+        category: ["heritage"],
+        summary: "面向文化遗产的欧洲联合博士项目，要求申请人围绕遗产主题准备研究计划，并匹配主导师和共同导师。更适合已有清晰proposal和潜在导师联系的申请人。",
+        keywords: ["Cultural Heritage", "Joint Supervision", "European Doctoral Training", "Proposal Design"],
+        url: "https://www.una-europa.eu/study/una-her-doc/application-process-and-requirements"
+      },
+      {
+        title: "HCI博士项目申请",
+        en: "Ph.D. Program in HCI",
+        org: "Carnegie Mellon University",
+        deadline: "Early 2026.11.18 / Final 2026.12.09",
+        type: "博士项目申请",
+        place: "美国Pittsburgh",
+        category: ["hci"],
+        summary: "CMU HCII是HCI顶级平台，适合人机交互、AI系统、社会计算、学习科学、设计研究方向。不是雇佣制岗位，但对AI/HCI路线非常值得作为申请目标。",
+        keywords: ["HCI", "AI Systems", "Social Computing", "Design Research"],
+        url: "https://hcii.cmu.edu/academics/phd-hci/admissions"
+      }
+    ];
+
+    const cards = document.querySelector("#cards");
+    const buttons = [...document.querySelectorAll("[data-filter]")];
+
+    function render(filter = "all") {
+      const visible = opportunities.filter(item => filter === "all" || item.category.includes(filter));
+      cards.innerHTML = visible.map((item, index) => `
+        <article class="card">
+          <div class="rank">${index + 1}</div>
+          <div class="content">
+            <p class="org">${item.org}</p>
+            <h2>${item.title}</h2>
+            <p class="en">${item.en}</p>
+            <p class="meta">
+              <span>截止：${item.deadline}</span>
+              <span>${item.type}</span>
+              <span>${item.place}</span>
+            </p>
+            <p class="summary">${item.summary}</p>
+            <div class="keywords">${item.keywords.map(keyword => `<span>${keyword}</span>`).join("")}</div>
+            <a class="link" href="${item.url}" target="_blank" rel="noopener noreferrer">查看原文链接</a>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        buttons.forEach(item => item.setAttribute("aria-pressed", "false"));
+        button.setAttribute("aria-pressed", "true");
+        render(button.dataset.filter);
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>
